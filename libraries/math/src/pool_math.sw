@@ -231,15 +231,8 @@ fn quote(amount_0: u64, reserve_0: u64, reserve_1: u64) -> u64 {
     u64::try_from(amount_0.as_u256() * reserve_1.as_u256() / reserve_0.as_u256()).unwrap()
 }
 
-// TODO: find a standard library function for that
 fn pow_decimals(decimals: u8) -> u256 {
-    let mut res: u256 = 1;
-    let mut i: u8 = 0;
-    while i < decimals {
-        res *= 10;
-        i += 1;
-    }
-    res
+    10.as_u256().pow(decimals.into())
 }
 
 fn k(
@@ -296,13 +289,14 @@ fn get_y(x_0: u256, xy: u256, y: u256) -> u256 {
     y
 }
 
-fn max(a: u64, b: u64) -> u64 {
-    if a > b { a } else { b }
-}
-
 fn calculate_fee(amount: u64, fee: u64) -> u64 {
-    let fee = u64::try_from(amount.as_u256() * fee.as_u256() / BASIS_POINTS_DENOMINATOR).unwrap();
-    max(1, fee)
+    let nominator = amount.as_u256() * fee.as_u256();
+    let fee = u64::try_from(nominator / BASIS_POINTS_DENOMINATOR).unwrap();
+    if nominator % BASIS_POINTS_DENOMINATOR != 0 {
+        fee + 1
+    } else {
+        fee
+    }
 }
 
 fn subtract_fee(amount: u64, fee: u64) -> u64 {
@@ -326,6 +320,8 @@ fn test_pow_decimals() {
     assert_eq(pow_decimals(7), 10000000);
     assert_eq(pow_decimals(8), 100000000);
     assert_eq(pow_decimals(9), 1000000000);
+    assert_eq(pow_decimals(18), ONE_E_18);
+    assert_eq(pow_decimals(72), ONE_E_18 * ONE_E_18 * ONE_E_18 * ONE_E_18);
 }
 
 #[test]
@@ -334,5 +330,7 @@ fn test_calculate_fee() {
     assert_eq(calculate_fee(10000, 1), 1);
     assert_eq(calculate_fee(20000, 1), 2);
     assert_eq(calculate_fee(20000, 10), 20);
-    assert_eq(calculate_fee(20001, 10), 20); // TODO: should be 21?
+    assert_eq(calculate_fee(20001, 10), 21);
+    assert_eq(calculate_fee(100, 10000), 100);
+    assert_eq(calculate_fee(u64::max(), 10000), u64::max());
 }
