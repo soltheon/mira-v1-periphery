@@ -14,10 +14,8 @@ pub mod common {
     };
 
     pub async fn deploy_amm(wallet: &WalletUnlocked) -> MiraAMMContract {
-        let storage_configuration = StorageConfiguration::default().with_autoload(false);
-
         let configuration =
-            LoadConfiguration::default().with_storage_configuration(storage_configuration);
+            LoadConfiguration::default().with_storage_configuration(StorageConfiguration::default());
 
         let contract_id = Contract::load_from(AMM_CONTRACT_BINARY_PATH, configuration)
             .unwrap()

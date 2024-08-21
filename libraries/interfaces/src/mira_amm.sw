@@ -17,9 +17,16 @@ abi MiraAMM {
     fn pool_metadata(pool_id: PoolId) -> Option<PoolMetadata>;
 
     #[storage(read)]
-    fn pools() -> Vec<PoolId>;
-
     fn fees() -> (u64, u64, u64, u64);
+
+    #[storage(write)]
+    fn set_protocol_fees(volatile_fee: u64, stable_fee: u64);
+
+    #[storage(write)]
+    fn set_hook(contract_id: Option<ContractId>);
+
+    #[storage(read)]
+    fn hook() -> Option<ContractId>;
 
     #[storage(read, write)]
     fn mint(pool_id: PoolId, to: Identity) -> Asset;
@@ -37,4 +44,7 @@ abi MiraAMM {
         to: Identity,
         data: Bytes,
     );
+
+    #[storage(read, write)]
+    fn transfer_ownership(new_owner: Identity);
 }

@@ -13,12 +13,12 @@
       "components": [
         {
           "name": "__tuple_element",
-          "type": 29,
+          "type": 32,
           "typeArguments": null
         },
         {
           "name": "__tuple_element",
-          "type": 29,
+          "type": 32,
           "typeArguments": null
         }
       ],
@@ -30,12 +30,12 @@
       "components": [
         {
           "name": "__tuple_element",
-          "type": 28,
+          "type": 31,
           "typeArguments": null
         },
         {
           "name": "__tuple_element",
-          "type": 28,
+          "type": 31,
           "typeArguments": null
         }
       ],
@@ -47,22 +47,22 @@
       "components": [
         {
           "name": "__tuple_element",
-          "type": 29,
+          "type": 32,
           "typeArguments": null
         },
         {
           "name": "__tuple_element",
-          "type": 29,
+          "type": 32,
           "typeArguments": null
         },
         {
           "name": "__tuple_element",
-          "type": 29,
+          "type": 32,
           "typeArguments": null
         },
         {
           "name": "__tuple_element",
-          "type": 29,
+          "type": 32,
           "typeArguments": null
         }
       ],
@@ -74,12 +74,12 @@
       "components": [
         {
           "name": "__tuple_element",
-          "type": 16,
+          "type": 19,
           "typeArguments": null
         },
         {
           "name": "__tuple_element",
-          "type": 16,
+          "type": 19,
           "typeArguments": null
         },
         {
@@ -104,6 +104,18 @@
     },
     {
       "typeId": 7,
+      "type": "enum AccessError",
+      "components": [
+        {
+          "name": "NotOwner",
+          "type": 0,
+          "typeArguments": null
+        }
+      ],
+      "typeParameters": null
+    },
+    {
+      "typeId": 8,
       "type": "enum AmmError",
       "components": [
         {
@@ -130,24 +142,36 @@
       "typeParameters": null
     },
     {
-      "typeId": 8,
+      "typeId": 9,
       "type": "enum Identity",
       "components": [
         {
           "name": "Address",
-          "type": 14,
+          "type": 17,
           "typeArguments": null
         },
         {
           "name": "ContractId",
-          "type": 19,
+          "type": 22,
           "typeArguments": null
         }
       ],
       "typeParameters": null
     },
     {
-      "typeId": 9,
+      "typeId": 10,
+      "type": "enum InitializationError",
+      "components": [
+        {
+          "name": "CannotReinitialized",
+          "type": 0,
+          "typeArguments": null
+        }
+      ],
+      "typeParameters": null
+    },
+    {
+      "typeId": 11,
       "type": "enum InputError",
       "components": [
         {
@@ -162,7 +186,7 @@
         },
         {
           "name": "InvalidAsset",
-          "type": 16,
+          "type": 19,
           "typeArguments": null
         },
         {
@@ -204,7 +228,7 @@
       "typeParameters": null
     },
     {
-      "typeId": 10,
+      "typeId": 12,
       "type": "enum Option",
       "components": [
         {
@@ -214,16 +238,16 @@
         },
         {
           "name": "Some",
-          "type": 12,
+          "type": 15,
           "typeArguments": null
         }
       ],
       "typeParameters": [
-        12
+        15
       ]
     },
     {
-      "typeId": 11,
+      "typeId": 13,
       "type": "enum ReentrancyError",
       "components": [
         {
@@ -235,19 +259,41 @@
       "typeParameters": null
     },
     {
-      "typeId": 12,
+      "typeId": 14,
+      "type": "enum State",
+      "components": [
+        {
+          "name": "Uninitialized",
+          "type": 0,
+          "typeArguments": null
+        },
+        {
+          "name": "Initialized",
+          "type": 9,
+          "typeArguments": null
+        },
+        {
+          "name": "Revoked",
+          "type": 0,
+          "typeArguments": null
+        }
+      ],
+      "typeParameters": null
+    },
+    {
+      "typeId": 15,
       "type": "generic T",
       "components": null,
       "typeParameters": null
     },
     {
-      "typeId": 13,
+      "typeId": 16,
       "type": "raw untyped ptr",
       "components": null,
       "typeParameters": null
     },
     {
-      "typeId": 14,
+      "typeId": 17,
       "type": "struct Address",
       "components": [
         {
@@ -259,24 +305,24 @@
       "typeParameters": null
     },
     {
-      "typeId": 15,
+      "typeId": 18,
       "type": "struct Asset",
       "components": [
         {
           "name": "id",
-          "type": 16,
+          "type": 19,
           "typeArguments": null
         },
         {
           "name": "amount",
-          "type": 29,
+          "type": 32,
           "typeArguments": null
         }
       ],
       "typeParameters": null
     },
     {
-      "typeId": 16,
+      "typeId": 19,
       "type": "struct AssetId",
       "components": [
         {
@@ -288,7 +334,7 @@
       "typeParameters": null
     },
     {
-      "typeId": 17,
+      "typeId": 20,
       "type": "struct BurnEvent",
       "components": [
         {
@@ -298,46 +344,46 @@
         },
         {
           "name": "recipient",
-          "type": 8,
+          "type": 9,
           "typeArguments": null
         },
         {
           "name": "liquidity",
-          "type": 15,
+          "type": 18,
           "typeArguments": null
         },
         {
           "name": "asset_0_out",
-          "type": 29,
+          "type": 32,
           "typeArguments": null
         },
         {
           "name": "asset_1_out",
-          "type": 29,
+          "type": 32,
           "typeArguments": null
         }
       ],
       "typeParameters": null
     },
     {
-      "typeId": 18,
+      "typeId": 21,
       "type": "struct Bytes",
       "components": [
         {
           "name": "buf",
-          "type": 23,
+          "type": 28,
           "typeArguments": null
         },
         {
           "name": "len",
-          "type": 29,
+          "type": 32,
           "typeArguments": null
         }
       ],
       "typeParameters": null
     },
     {
-      "typeId": 19,
+      "typeId": 22,
       "type": "struct ContractId",
       "components": [
         {
@@ -349,7 +395,7 @@
       "typeParameters": null
     },
     {
-      "typeId": 20,
+      "typeId": 23,
       "type": "struct CreatePoolEvent",
       "components": [
         {
@@ -361,7 +407,7 @@
       "typeParameters": null
     },
     {
-      "typeId": 21,
+      "typeId": 24,
       "type": "struct MintEvent",
       "components": [
         {
@@ -371,102 +417,34 @@
         },
         {
           "name": "recipient",
-          "type": 8,
+          "type": 9,
           "typeArguments": null
         },
         {
           "name": "liquidity",
-          "type": 15,
+          "type": 18,
           "typeArguments": null
         },
         {
           "name": "asset_0_in",
-          "type": 29,
+          "type": 32,
           "typeArguments": null
         },
         {
           "name": "asset_1_in",
-          "type": 29,
+          "type": 32,
           "typeArguments": null
         }
       ],
       "typeParameters": null
-    },
-    {
-      "typeId": 22,
-      "type": "struct PoolMetadata",
-      "components": [
-        {
-          "name": "reserve_0",
-          "type": 29,
-          "typeArguments": null
-        },
-        {
-          "name": "reserve_1",
-          "type": 29,
-          "typeArguments": null
-        },
-        {
-          "name": "liquidity",
-          "type": 15,
-          "typeArguments": null
-        },
-        {
-          "name": "decimals_0",
-          "type": 30,
-          "typeArguments": null
-        },
-        {
-          "name": "decimals_1",
-          "type": 30,
-          "typeArguments": null
-        }
-      ],
-      "typeParameters": null
-    },
-    {
-      "typeId": 23,
-      "type": "struct RawBytes",
-      "components": [
-        {
-          "name": "ptr",
-          "type": 13,
-          "typeArguments": null
-        },
-        {
-          "name": "cap",
-          "type": 29,
-          "typeArguments": null
-        }
-      ],
-      "typeParameters": null
-    },
-    {
-      "typeId": 24,
-      "type": "struct RawVec",
-      "components": [
-        {
-          "name": "ptr",
-          "type": 13,
-          "typeArguments": null
-        },
-        {
-          "name": "cap",
-          "type": 29,
-          "typeArguments": null
-        }
-      ],
-      "typeParameters": [
-        12
-      ]
     },
     {
       "typeId": 25,
-      "type": "struct String",
+      "type": "struct OwnershipSet",
       "components": [
         {
-          "name": "bytes",
-          "type": 18,
+          "name": "new_owner",
+          "type": 9,
           "typeArguments": null
         }
       ],
@@ -474,6 +452,84 @@
     },
     {
       "typeId": 26,
+      "type": "struct OwnershipTransferred",
+      "components": [
+        {
+          "name": "new_owner",
+          "type": 9,
+          "typeArguments": null
+        },
+        {
+          "name": "previous_owner",
+          "type": 9,
+          "typeArguments": null
+        }
+      ],
+      "typeParameters": null
+    },
+    {
+      "typeId": 27,
+      "type": "struct PoolMetadata",
+      "components": [
+        {
+          "name": "reserve_0",
+          "type": 32,
+          "typeArguments": null
+        },
+        {
+          "name": "reserve_1",
+          "type": 32,
+          "typeArguments": null
+        },
+        {
+          "name": "liquidity",
+          "type": 18,
+          "typeArguments": null
+        },
+        {
+          "name": "decimals_0",
+          "type": 33,
+          "typeArguments": null
+        },
+        {
+          "name": "decimals_1",
+          "type": 33,
+          "typeArguments": null
+        }
+      ],
+      "typeParameters": null
+    },
+    {
+      "typeId": 28,
+      "type": "struct RawBytes",
+      "components": [
+        {
+          "name": "ptr",
+          "type": 16,
+          "typeArguments": null
+        },
+        {
+          "name": "cap",
+          "type": 32,
+          "typeArguments": null
+        }
+      ],
+      "typeParameters": null
+    },
+    {
+      "typeId": 29,
+      "type": "struct String",
+      "components": [
+        {
+          "name": "bytes",
+          "type": 21,
+          "typeArguments": null
+        }
+      ],
+      "typeParameters": null
+    },
+    {
+      "typeId": 30,
       "type": "struct SwapEvent",
       "components": [
         {
@@ -483,71 +539,46 @@
         },
         {
           "name": "recipient",
-          "type": 8,
+          "type": 9,
           "typeArguments": null
         },
         {
           "name": "asset_0_in",
-          "type": 29,
+          "type": 32,
           "typeArguments": null
         },
         {
           "name": "asset_1_in",
-          "type": 29,
+          "type": 32,
           "typeArguments": null
         },
         {
           "name": "asset_0_out",
-          "type": 29,
+          "type": 32,
           "typeArguments": null
         },
         {
           "name": "asset_1_out",
-          "type": 29,
+          "type": 32,
           "typeArguments": null
         }
       ],
       "typeParameters": null
     },
     {
-      "typeId": 27,
-      "type": "struct Vec",
-      "components": [
-        {
-          "name": "buf",
-          "type": 24,
-          "typeArguments": [
-            {
-              "name": "",
-              "type": 12,
-              "typeArguments": null
-            }
-          ]
-        },
-        {
-          "name": "len",
-          "type": 29,
-          "typeArguments": null
-        }
-      ],
-      "typeParameters": [
-        12
-      ]
-    },
-    {
-      "typeId": 28,
+      "typeId": 31,
       "type": "u256",
       "components": null,
       "typeParameters": null
     },
     {
-      "typeId": 29,
+      "typeId": 32,
       "type": "u64",
       "components": null,
       "typeParameters": null
     },
     {
-      "typeId": 30,
+      "typeId": 33,
       "type": "u8",
       "components": null,
       "typeParameters": null
@@ -555,21 +586,38 @@
   ],
   "functions": [
     {
+      "inputs": [],
+      "name": "owner",
+      "output": {
+        "name": "",
+        "type": 14,
+        "typeArguments": null
+      },
+      "attributes": [
+        {
+          "name": "storage",
+          "arguments": [
+            "read"
+          ]
+        }
+      ]
+    },
+    {
       "inputs": [
         {
           "name": "asset",
-          "type": 16,
+          "type": 19,
           "typeArguments": null
         }
       ],
       "name": "decimals",
       "output": {
         "name": "",
-        "type": 10,
+        "type": 12,
         "typeArguments": [
           {
             "name": "",
-            "type": 30,
+            "type": 33,
             "typeArguments": null
           }
         ]
@@ -587,18 +635,18 @@
       "inputs": [
         {
           "name": "asset",
-          "type": 16,
+          "type": 19,
           "typeArguments": null
         }
       ],
       "name": "name",
       "output": {
         "name": "",
-        "type": 10,
+        "type": 12,
         "typeArguments": [
           {
             "name": "",
-            "type": 25,
+            "type": 29,
             "typeArguments": null
           }
         ]
@@ -616,18 +664,18 @@
       "inputs": [
         {
           "name": "asset",
-          "type": 16,
+          "type": 19,
           "typeArguments": null
         }
       ],
       "name": "symbol",
       "output": {
         "name": "",
-        "type": 10,
+        "type": 12,
         "typeArguments": [
           {
             "name": "",
-            "type": 25,
+            "type": 29,
             "typeArguments": null
           }
         ]
@@ -646,7 +694,7 @@
       "name": "total_assets",
       "output": {
         "name": "",
-        "type": 29,
+        "type": 32,
         "typeArguments": null
       },
       "attributes": [
@@ -662,18 +710,18 @@
       "inputs": [
         {
           "name": "asset",
-          "type": 16,
+          "type": 19,
           "typeArguments": null
         }
       ],
       "name": "total_supply",
       "output": {
         "name": "",
-        "type": 10,
+        "type": 12,
         "typeArguments": [
           {
             "name": "",
-            "type": 29,
+            "type": 32,
             "typeArguments": null
           }
         ]
@@ -696,7 +744,7 @@
         },
         {
           "name": "to",
-          "type": 8,
+          "type": 9,
           "typeArguments": null
         }
       ],
@@ -724,7 +772,7 @@
       "inputs": [
         {
           "name": "token_0_contract_id",
-          "type": 19,
+          "type": 22,
           "typeArguments": null
         },
         {
@@ -734,7 +782,7 @@
         },
         {
           "name": "token_1_contract_id",
-          "type": 19,
+          "type": 22,
           "typeArguments": null
         },
         {
@@ -782,6 +830,29 @@
       ]
     },
     {
+      "inputs": [],
+      "name": "hook",
+      "output": {
+        "name": "",
+        "type": 12,
+        "typeArguments": [
+          {
+            "name": "",
+            "type": 22,
+            "typeArguments": null
+          }
+        ]
+      },
+      "attributes": [
+        {
+          "name": "storage",
+          "arguments": [
+            "read"
+          ]
+        }
+      ]
+    },
+    {
       "inputs": [
         {
           "name": "pool_id",
@@ -790,14 +861,14 @@
         },
         {
           "name": "to",
-          "type": 8,
+          "type": 9,
           "typeArguments": null
         }
       ],
       "name": "mint",
       "output": {
         "name": "",
-        "type": 15,
+        "type": 18,
         "typeArguments": null
       },
       "attributes": [
@@ -821,34 +892,11 @@
       "name": "pool_metadata",
       "output": {
         "name": "",
-        "type": 10,
+        "type": 12,
         "typeArguments": [
           {
             "name": "",
-            "type": 22,
-            "typeArguments": null
-          }
-        ]
-      },
-      "attributes": [
-        {
-          "name": "storage",
-          "arguments": [
-            "read"
-          ]
-        }
-      ]
-    },
-    {
-      "inputs": [],
-      "name": "pools",
-      "output": {
-        "name": "",
-        "type": 27,
-        "typeArguments": [
-          {
-            "name": "",
-            "type": 4,
+            "type": 27,
             "typeArguments": null
           }
         ]
@@ -865,13 +913,42 @@
     {
       "inputs": [
         {
+          "name": "contract_id",
+          "type": 12,
+          "typeArguments": [
+            {
+              "name": "",
+              "type": 22,
+              "typeArguments": null
+            }
+          ]
+        }
+      ],
+      "name": "set_hook",
+      "output": {
+        "name": "",
+        "type": 0,
+        "typeArguments": null
+      },
+      "attributes": [
+        {
+          "name": "storage",
+          "arguments": [
+            "write"
+          ]
+        }
+      ]
+    },
+    {
+      "inputs": [
+        {
           "name": "volatile_fee",
-          "type": 29,
+          "type": 32,
           "typeArguments": null
         },
         {
           "name": "stable_fee",
-          "type": 29,
+          "type": 32,
           "typeArguments": null
         }
       ],
@@ -899,22 +976,22 @@
         },
         {
           "name": "asset_0_out",
-          "type": 29,
+          "type": 32,
           "typeArguments": null
         },
         {
           "name": "asset_1_out",
-          "type": 29,
+          "type": 32,
           "typeArguments": null
         },
         {
           "name": "to",
-          "type": 8,
+          "type": 9,
           "typeArguments": null
         },
         {
           "name": "data",
-          "type": 18,
+          "type": 21,
           "typeArguments": null
         }
       ],
@@ -937,6 +1014,30 @@
           ]
         }
       ]
+    },
+    {
+      "inputs": [
+        {
+          "name": "new_owner",
+          "type": 9,
+          "typeArguments": null
+        }
+      ],
+      "name": "transfer_ownership",
+      "output": {
+        "name": "",
+        "type": 0,
+        "typeArguments": null
+      },
+      "attributes": [
+        {
+          "name": "storage",
+          "arguments": [
+            "read",
+            "write"
+          ]
+        }
+      ]
     }
   ],
   "loggedTypes": [
@@ -944,7 +1045,7 @@
       "logId": "5557842539076482339",
       "loggedType": {
         "name": "",
-        "type": 11,
+        "type": 13,
         "typeArguments": []
       }
     },
@@ -952,7 +1053,7 @@
       "logId": "3176768710663004356",
       "loggedType": {
         "name": "",
-        "type": 9,
+        "type": 11,
         "typeArguments": []
       }
     },
@@ -960,7 +1061,7 @@
       "logId": "8431332278172281949",
       "loggedType": {
         "name": "",
-        "type": 7,
+        "type": 8,
         "typeArguments": []
       }
     },
@@ -968,7 +1069,7 @@
       "logId": "3903049024573527731",
       "loggedType": {
         "name": "",
-        "type": 17,
+        "type": 20,
         "typeArguments": []
       }
     },
@@ -976,7 +1077,7 @@
       "logId": "12224862438738316526",
       "loggedType": {
         "name": "",
-        "type": 20,
+        "type": 23,
         "typeArguments": []
       }
     },
@@ -984,12 +1085,44 @@
       "logId": "12547144180067087194",
       "loggedType": {
         "name": "",
-        "type": 21,
+        "type": 24,
+        "typeArguments": []
+      }
+    },
+    {
+      "logId": "4571204900286667806",
+      "loggedType": {
+        "name": "",
+        "type": 7,
         "typeArguments": []
       }
     },
     {
       "logId": "7938487056892321597",
+      "loggedType": {
+        "name": "",
+        "type": 30,
+        "typeArguments": []
+      }
+    },
+    {
+      "logId": "2161305517876418151",
+      "loggedType": {
+        "name": "",
+        "type": 10,
+        "typeArguments": []
+      }
+    },
+    {
+      "logId": "16280289466020123285",
+      "loggedType": {
+        "name": "",
+        "type": 25,
+        "typeArguments": []
+      }
+    },
+    {
+      "logId": "12970362301975156672",
       "loggedType": {
         "name": "",
         "type": 26,
@@ -1003,28 +1136,19 @@
       "name": "LP_FEE_VOLATILE",
       "configurableType": {
         "name": "",
-        "type": 29,
+        "type": 32,
         "typeArguments": null
       },
-      "offset": 58056
+      "offset": 64736
     },
     {
       "name": "LP_FEE_STABLE",
       "configurableType": {
         "name": "",
-        "type": 29,
+        "type": 32,
         "typeArguments": null
       },
-      "offset": 58048
-    },
-    {
-      "name": "ADMIN",
-      "configurableType": {
-        "name": "",
-        "type": 8,
-        "typeArguments": []
-      },
-      "offset": 58008
+      "offset": 64728
     }
   ]
 }
