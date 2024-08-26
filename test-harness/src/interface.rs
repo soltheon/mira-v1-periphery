@@ -17,6 +17,10 @@ abigen!(
         name = "RemoveLiquidityScript",
         abi = "scripts/remove_liquidity_script/out/debug/remove_liquidity_script-abi.json"
     ),
+    Script(
+        name = "SwapExactInputScript",
+        abi = "scripts/swap_exact_input_script/out/debug/swap_exact_input_script-abi.json"
+    ),
     Contract(
         name = "MiraAMM",
         abi = "fixtures/mira-amm/mira_amm_contract-abi.json"
@@ -29,6 +33,19 @@ abigen!(
 
 pub mod amm {
     use super::*;
+    use fuels::types::Identity;
+
+    pub async fn initialize_ownership(
+        contract: &MiraAMM<WalletUnlocked>,
+        owner: Identity,
+    ) -> CallResponse<()> {
+        contract
+            .methods()
+            .transfer_ownership(owner)
+            .call()
+            .await
+            .unwrap()
+    }
 
     pub async fn create_pool(
         contract: &MiraAMM<WalletUnlocked>,
