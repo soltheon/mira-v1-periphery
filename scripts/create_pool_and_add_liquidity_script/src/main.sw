@@ -9,7 +9,11 @@ configurable {
 }
 
 fn main(
-    pool_id: PoolId,
+    token_0_contract_id: ContractId,
+    token_0_sub_id: b256,
+    token_1_contract_id: ContractId,
+    token_1_sub_id: b256,
+    is_stable: bool,
     amount_0_desired: u64,
     amount_1_desired: u64,
     recipient: Identity,
@@ -18,7 +22,13 @@ fn main(
     check_deadline(deadline);
     let amm = abi(MiraAMM, AMM_CONTRACT_ID.into());
 
-    require(amm.pool_metadata(pool_id).is_none(), "Pool already exists");
+    let pool_id = amm.create_pool(
+        token_0_contract_id,
+        token_0_sub_id,
+        token_1_contract_id,
+        token_1_sub_id,
+        is_stable,
+    );
 
     transfer(
         Identity::ContractId(AMM_CONTRACT_ID),
