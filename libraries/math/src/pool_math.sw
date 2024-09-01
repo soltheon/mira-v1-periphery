@@ -289,8 +289,8 @@ fn get_y(x_0: u256, xy: u256, y: u256) -> u256 {
     y
 }
 
-fn calculate_fee(amount: u64, fee: u64) -> u64 {
-    let nominator = amount.as_u256() * fee.as_u256();
+fn calculate_fee_to_subtract(amount: u64, feeBP: u64) -> u64 {
+    let nominator = amount.as_u256() * feeBP.as_u256();
     let fee = u64::try_from(nominator / BASIS_POINTS_DENOMINATOR).unwrap();
     if nominator % BASIS_POINTS_DENOMINATOR != 0 {
         fee + 1
@@ -299,12 +299,23 @@ fn calculate_fee(amount: u64, fee: u64) -> u64 {
     }
 }
 
+fn calculate_fee_to_add(amount: u64, feeBP: u64) -> u64 {
+    let nominator = amount.as_u256() * feeBP.as_u256();
+    let denominator = BASIS_POINTS_DENOMINATOR - feeBP.as_u256();
+    let fee = u64::try_from(nominator / denominator).unwrap();
+    if nominator % denominator != 0 {
+        fee + 1
+    } else {
+        fee
+    }
+}
+
 fn subtract_fee(amount: u64, fee: u64) -> u64 {
-    amount - calculate_fee(amount, fee)
+    amount - calculate_fee_to_subtract(amount, fee)
 }
 
 fn add_fee(amount: u64, fee: u64) -> u64 {
-    amount + calculate_fee(amount, fee)
+    amount + calculate_fee_to_add(amount, fee)
 }
 
 // Tests
@@ -325,12 +336,46 @@ fn test_pow_decimals() {
 }
 
 #[test]
-fn test_calculate_fee() {
-    assert_eq(calculate_fee(10, 1), 1);
-    assert_eq(calculate_fee(10000, 1), 1);
-    assert_eq(calculate_fee(20000, 1), 2);
-    assert_eq(calculate_fee(20000, 10), 20);
-    assert_eq(calculate_fee(20001, 10), 21);
-    assert_eq(calculate_fee(100, 10000), 100);
-    assert_eq(calculate_fee(u64::max(), 10000), u64::max());
+fn test_calculate_fee_to_subtract() {
+    assert_eq(calculate_fee_to_subtract(10, 1), 1);
+    assert_eq(calculate_fee_to_subtract(10000, 1), 1);
+    assert_eq(calculate_fee_to_subtract(20000, 1), 2);
+    assert_eq(calculate_fee_to_subtract(20000, 10), 20);
+    assert_eq(calculate_fee_to_subtract(20001, 10), 21);
+    assert_eq(calculate_fee_to_subtract(100, 10000), 100);
+    assert_eq(calculate_fee_to_subtract(u64::max(), 10000), u64::max());
+}
+
+#[test]
+fn test_calculate_fee_to_add() {
+    let mut amounts: Vec<u64> = Vec::new();
+    amounts.push(10);
+    amounts.push(100);
+    amounts.push(1000);
+    amounts.push(10000);
+    amounts.push(20000);
+    amounts.push(20001);
+    amounts.push(u64::max() / 2);
+
+    let mut fees: Vec<u64> = Vec::new();
+    fees.push(1);
+    fees.push(10);
+    fees.push(100);
+    fees.push(1000);
+    fees.push(5000);
+
+    // forcfmt breaks for expressions like `for amount in amounts.iter()`, hence while cycle
+    let mut i = 0;
+    let mut j = 0;
+    while i < amounts.len() {
+        let amount = amounts.get(i).unwrap();
+        while j < fees.len() {
+            let fee = fees.get(j).unwrap();
+            let withAddedFee = amount + calculate_fee_to_add(amount, fee);
+            let withSubtractedFee = withAddedFee - calculate_fee_to_subtract(withAddedFee, fee);
+            assert_eq(withSubtractedFee, amount);
+            j = j + 1;
+        }
+        i = i + 1;
+    }
 }
