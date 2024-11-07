@@ -98,6 +98,73 @@ pub fn get_amount_in(
     }
 }
 
+pub fn get_amounts_out_multiple_in(
+    amm_contract: ContractId,
+    amounts_in: Vec<u64>,
+    assets_in: Vec<AssetId>,
+    pools: Vec<PoolId>,
+) -> Vec<u64> {
+    require(pools.len() >= 1, "Router: INVALID_PATH");
+
+    let amm = abi(MiraAMM, amm_contract.into());
+    let (lp_fee_volatile, lp_fee_stable, protocol_fee_volatile, protocol_fee_stable) = amm.fees();
+    let (stable_fee, volatile_fee) = (lp_fee_stable + protocol_fee_stable, lp_fee_volatile + protocol_fee_volatile);
+
+    let mut amounts: Vec<u64> = Vec::new();
+
+    let mut i = 0;
+    while (i < pools.len()) {
+        let pool_id = pools.get(i).unwrap();
+        let pool_opt = amm.pool_metadata(pool_id);
+        require(pool_opt.is_some(), "Pool not present");
+        let pool = pool_opt.unwrap();
+        let amount_in = amounts_in.get(i).unwrap();
+        let asset_in = assets_in.get(i).unwrap();
+        let fee = if is_stable(pool_id) {
+            stable_fee
+        } else {
+            volatile_fee
+        };
+        let amount_out = if asset_in == pool_id.0 {
+            get_amount_out(
+                is_stable(pool_id),
+                pool.reserve_0
+                    .as_u256(),
+                pool.reserve_1
+                    .as_u256(),
+                pow_decimals(pool.decimals_0),
+                pow_decimals(pool.decimals_1),
+                subtract_fee(amount_in, fee)
+                    .as_u256(),
+            )
+        } else {
+            get_amount_out(
+                is_stable(pool_id),
+                pool.reserve_1
+                    .as_u256(),
+                pool.reserve_0
+                    .as_u256(),
+                pow_decimals(pool.decimals_1),
+                pow_decimals(pool.decimals_0),
+                subtract_fee(amount_in, fee)
+                    .as_u256(),
+            )
+        };
+
+        let asset_out = if pool_id.0 == asset_in {
+            pool_id.1
+        } else {
+            pool_id.0
+        };
+        amounts.push(u64::try_from(amount_out).unwrap());
+        i += 1;
+    }
+    amounts
+
+}
+
+
+
 pub fn get_amounts_out(
     amm_contract: ContractId,
     amount_in: u64,

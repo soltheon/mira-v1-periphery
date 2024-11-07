@@ -196,16 +196,12 @@ async fn swap_between_three_volatile_tokens() {
     let wallet_balances_1_before = pool_assets_balance(&wallet, &pool_id_1, amm.id).await;
     let pool_metadata_0_before = pool_metadata(&amm.instance, pool_id_0).await.value.unwrap();
     let pool_metadata_1_before = pool_metadata(&amm.instance, pool_id_1).await.value.unwrap();
-    let amount_out_0s = vec!(0, 992);
-    let amount_out_1s = vec!(996, 0);
     let amounts_out = swap_exact_input_script
         .main(
             token_0_to_swap,
-            token_2_expected,
+            token_0_id,
+            0,
             vec![pool_id_0, pool_id_1],
-            vec![token_0_id, token_1_id, token_2_id],
-            amount_out_0s,
-            amount_out_1s,
             wallet.address().into(),
             deadline,
         )

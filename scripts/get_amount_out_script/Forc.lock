@@ -1,0 +1,40 @@
+[[package]]
+name = "core"
+source = "path+from-root-7053AAA90CC5E690"
+
+[[package]]
+name = "get_amount_out_script"
+source = "member"
+dependencies = [
+    "interfaces",
+    "math",
+    "std",
+    "utils",
+]
+
+[[package]]
+name = "interfaces"
+source = "path+from-root-EA9CD8D51F7141AE"
+dependencies = ["std"]
+
+[[package]]
+name = "math"
+source = "path+from-root-EA9CD8D51F7141AE"
+dependencies = [
+    "interfaces",
+    "std",
+    "utils",
+]
+
+[[package]]
+name = "std"
+source = "git+https://github.com/fuellabs/sway?tag=v0.66.2#31486c0b47669612acb7c64d66ecb50aea281282"
+dependencies = ["core"]
+
+[[package]]
+name = "utils"
+source = "path+from-root-EA9CD8D51F7141AE"
+dependencies = [
+    "interfaces",
+    "std",
+]
